@@ -5,6 +5,14 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+#Starting Point for all examples
+StartingPoint/StartingPoint/[Ll]ibrary/
+StartingPoint/StartingPoint/[Tt]emp/
+StartingPoint/StartingPoint/[Oo]bj/
+StartingPoint/StartingPoint/[Bb]uild/
+StartingPoint/StartingPoint/[Bb]uilds/
+StartingPoint/StartingPoint/Assets/AssetStoreTools*
+
 # Visual Studio cache directory
 .vs/
 
