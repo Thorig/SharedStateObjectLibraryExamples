@@ -2,16 +2,9 @@
 
 public class TileMap : MonoBehaviour
 {
-    public Vector2 correctionOnSlopeLeft;
-    public Vector2 correctionOnSlopeRight;
+    private static int TILE_1X1 = 0;
+    private static int TILE_1X2 = 1;
+    private static int TILE_1X3 = 2;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int tileType;
 }

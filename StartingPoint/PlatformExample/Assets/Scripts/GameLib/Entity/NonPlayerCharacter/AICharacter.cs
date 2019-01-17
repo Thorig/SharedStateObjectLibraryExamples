@@ -10,6 +10,19 @@ namespace GameLib.Entity.NonPlayerCharacter
         [SerializeField]
         protected AICharacterController aiCharacterController;
 
+        public AICharacterController AiCharacterController
+        {
+            get
+            {
+                return aiCharacterController;
+            }
+
+            set
+            {
+                aiCharacterController = value;
+            }
+        }
+
         [SerializeField]
         protected Vector3 lastPosition;
 

@@ -43,7 +43,7 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
             character.setKeysPressed(keysPressed);
         }
 
-        private KeysPressed turnIfWallIsNear(IGravityClient gravityClient, float topFrontDistance,
+        protected virtual KeysPressed turnIfWallIsNear(IGravityClient gravityClient, float topFrontDistance,
             float minimalSpaceBetweenTileFront, KeysPressed keysPressed, out bool turned)
         {
             turned = false;
@@ -84,27 +84,30 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
         {
             IGravityClient gravityClient = character.getEntity().getGravityClient();
             RayHitboxes rayHitboxes = gravityClient.getRayHitboxes();
-
-            if (gravityClient.isFlipped() && rayHitboxes.HitLeftBelow.distance > 1.0f)
+            if (gravityClient.isFlipped() && rayHitboxes.HitLeftBelow.distance > 1.0f - 
+                (rayHitboxes.HitLeftBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeLeft.x : 0))
             {
                 keysPressed.left = false;
                 keysPressed.right = true;
             }
             else if (gravityClient.isFlipped() &&
-                rayHitboxes.HitLeftBelow.distance <= minimalSpaceBetweenTileBelow)
+                rayHitboxes.HitLeftBelow.distance <= minimalSpaceBetweenTileBelow - 
+                (rayHitboxes.HitLeftBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeLeft.x : 0))
             {
                 keysPressed.left = true;
                 keysPressed.right = false;
             }
 
             if (!gravityClient.isFlipped() &&
-                rayHitboxes.HitRightBelow.distance > 1.0f)
+                rayHitboxes.HitRightBelow.distance > 1.0f - 
+                (rayHitboxes.HitRightBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeRight.x : 0))
             {
                 keysPressed.left = true;
                 keysPressed.right = false;
             }
             else if (!gravityClient.isFlipped() &&
-                rayHitboxes.HitRightBelow.distance <= minimalSpaceBetweenTileBelow)
+                rayHitboxes.HitRightBelow.distance <= minimalSpaceBetweenTileBelow - 
+                (rayHitboxes.HitRightBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeRight.x : 0))
             {
                 keysPressed.left = false;
                 keysPressed.right = true;

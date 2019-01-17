@@ -124,7 +124,7 @@ namespace GameLib.System.Gravity2D
                 layermask, true);
             float correction = 0.0f;
             float minimalSpaceBetweenTileBelow = (rayHitboxes.HitMiddleBelow.collider.tag.CompareTo("Slope") == 0) ?
-                (rayInformation.MinimalSpaceBetweenTileBelow * 1.5f) :
+                (rayInformation.MinimalSpaceBetweenTileBelow )://* 1.5f) :
                 rayInformation.MinimalSpaceBetweenTileBelow;
 
             bool objectOnFloor = (rayHitboxes.DistanceBelow <
@@ -140,7 +140,7 @@ namespace GameLib.System.Gravity2D
             }
             else
             {
-                Debug.Log((rayHitboxes.DistanceBelow) + " " + (rayInformation.MinimalSpaceBetweenTileBelow * 1.1f));
+                //Debug.Log((rayHitboxes.DistanceBelow) + " " + (rayInformation.MinimalSpaceBetweenTileBelow * 1.1f));
             }
 
             return objectOnFloor;

@@ -13,7 +13,7 @@ namespace GameLib.Entity.Behaviour
             entity.switchAnimation(animationState);
         }
 
-        public virtual bool onCollisionEnter2D(Collision2D collision)
+        public virtual bool onCollisionEnter2D(Collision2D collision, IEntity entity)
         {
             return false;
         }
