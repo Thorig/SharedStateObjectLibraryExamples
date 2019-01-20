@@ -8,10 +8,6 @@ namespace GameLib.System.Gravity2D
     [CreateAssetMenu(fileName = "Data", menuName = "GameLib/Rayinformation", order = 1)]
     public class RayInformation : RayInformationAttributes
     {
-
-        public Vector2 correctionOnSlopeLeft;
-        public Vector2 correctionOnSlopeRight;
-
         public float checkAttackRay(IGravityClient gameObject, Vector3 startPosRay, Vector3 endPosRay, string tag)
         {
             float result = -1.0f;
@@ -47,50 +43,19 @@ namespace GameLib.System.Gravity2D
             float distanceBelow = checkRay(gameObject, posRayMiddleBelow,
                                       1000.0f, yAangle, zAngle, out hitMiddleBelow, Color.blue, layersToIgnore + (1 << slopeLayerNumber));
 
-            float m = ((hitMiddleBelow.collider.tag.CompareTo("Slope") == 0) ? belowTolerance : 1.0f);
+            float belowTolerance = ((hitMiddleBelow.collider.tag.CompareTo("Slope") == 0) ? this.belowTolerance : 1.0f);
 
             bool rightRayOnSlope = checkRightRayBelowForSlope(gameObject, yAangle, zAngle, out hitRightBelow, layersToIgnore);
             bool leftRayOnSlope = checkLeftRayBelowForSlope(gameObject, yAangle, zAngle, out hitLeftBelow, layersToIgnore);
-
-            correctionOnSlopeLeft = posRayLeftBelow;
-            correctionOnSlopeRight = posRayRightBelow;
-
-
-            if (rightRayOnSlope && hitRightBelow.collider.gameObject.name.CompareTo("Hills1x1") == 0)
-            {
-                correctionOnSlopeRight = SlopeCorrectionList[Actor.RIGHT_CORRECTION_SLOPE_1x1];
-            }
-            if (rightRayOnSlope && hitRightBelow.collider.gameObject.name.CompareTo("Hills1x2") == 0)
-            {
-                correctionOnSlopeRight = SlopeCorrectionList[Actor.RIGHT_CORRECTION_SLOPE_1x2];
-            }
-            if (rightRayOnSlope && hitRightBelow.collider.gameObject.name.CompareTo("Hills1x3") == 0)
-            {
-                correctionOnSlopeRight = SlopeCorrectionList[Actor.RIGHT_CORRECTION_SLOPE_1x3];
-            }
-
-            if (leftRayOnSlope && hitLeftBelow.collider.gameObject.name.CompareTo("Hills1x1") == 0)
-            {
-                correctionOnSlopeLeft = SlopeCorrectionList[Actor.LEFT_CORRECTION_SLOPE_1x1];
-            }
-            if (leftRayOnSlope && hitLeftBelow.collider.gameObject.name.CompareTo("Hills1x2") == 0)
-            {
-                correctionOnSlopeLeft = SlopeCorrectionList[Actor.LEFT_CORRECTION_SLOPE_1x2];
-            }
-            if (leftRayOnSlope && hitLeftBelow.collider.gameObject.name.CompareTo("Hills1x3") == 0)
-            {
-                correctionOnSlopeLeft = SlopeCorrectionList[Actor.LEFT_CORRECTION_SLOPE_1x3];
-            }
-
-            float leftDistanceBelow = checkRay(gameObject, correctionOnSlopeLeft, 1000.0f, yAangle, zAngle, out hitLeftBelow, Color.gray, layersToIgnore +
-                    ((!leftRayOnSlope) ? 0 : (1 << slopeLayerNumber)));
-
-            float rightDistanceBelow = checkRay(gameObject, correctionOnSlopeRight, 1000.0f, yAangle, zAngle, out hitRightBelow, Color.green, layersToIgnore +
-                ((!rightRayOnSlope) ? 0 : (1 << slopeLayerNumber)));
             
-            if (hitMiddleBelow.collider.tag.CompareTo("Slope") != 0 ||  
-                (doIgnoreSlope && distanceBelow >= (minimalSpaceBetweenTileBelow * m)) || 
-                !doIgnoreSlope)
+            float leftDistanceBelow = checkRay(gameObject, posRayLeftBelow, 1000.0f, yAangle, 
+                zAngle, out hitLeftBelow, Color.gray, layersToIgnore + ((doIgnoreSlope) ? 0 : (1 << slopeLayerNumber)));
+
+            float rightDistanceBelow = checkRay(gameObject, posRayRightBelow, 1000.0f, yAangle, 
+                zAngle, out hitRightBelow, Color.green, layersToIgnore + ((doIgnoreSlope) ? 0 : (1 << slopeLayerNumber)));
+
+            if (!doIgnoreSlope ||  
+                (doIgnoreSlope && distanceBelow >= (minimalSpaceBetweenTileBelow * belowTolerance)))
             {
                 if (leftDistanceBelow < distanceBelow)
                 {

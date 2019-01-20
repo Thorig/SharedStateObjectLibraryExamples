@@ -25,7 +25,7 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
             RayHitboxes rayHitboxes = gravityClient.getRayHitboxes();
 
             gravityClient.getRayInformation().checkRaysFront(gravityClient, 0.0f, character.getEntity().getTransform().eulerAngles.z + 0.0f, layermask, false);
-            gravityClient.getRayInformation().checkRaysBelow(gravityClient, 0.0f, character.getEntity().getTransform().eulerAngles.z + 270.0f, layermask, true);
+            gravityClient.getRayInformation().checkRaysBelow(gravityClient, 0.0f, character.getEntity().getTransform().eulerAngles.z + 270.0f, layermask, false);
 
             float minimalSpaceBetweenTileBelow = rayInformation.MinimalSpaceBetweenTileBelow;
             float topFrontDistance = (rayHitboxes.HitTopFront.distance * 0.9f);
@@ -84,30 +84,29 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
         {
             IGravityClient gravityClient = character.getEntity().getGravityClient();
             RayHitboxes rayHitboxes = gravityClient.getRayHitboxes();
-            if (gravityClient.isFlipped() && rayHitboxes.HitLeftBelow.distance > 1.0f - 
-                (rayHitboxes.HitLeftBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeLeft.x : 0))
+            
+            if (gravityClient.isFlipped() && rayHitboxes.HitLeftBelow.distance > 1.0f)
             {
+                Debug.Log("1. " + rayHitboxes.HitLeftBelow.distance);
                 keysPressed.left = false;
                 keysPressed.right = true;
             }
             else if (gravityClient.isFlipped() &&
-                rayHitboxes.HitLeftBelow.distance <= minimalSpaceBetweenTileBelow - 
-                (rayHitboxes.HitLeftBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeLeft.x : 0))
+                rayHitboxes.HitLeftBelow.distance <= minimalSpaceBetweenTileBelow)
             {
                 keysPressed.left = true;
                 keysPressed.right = false;
             }
 
             if (!gravityClient.isFlipped() &&
-                rayHitboxes.HitRightBelow.distance > 1.0f - 
-                (rayHitboxes.HitRightBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeRight.x : 0))
+                rayHitboxes.HitRightBelow.distance > 1.0f)
             {
+                Debug.Log("2. " + rayHitboxes.HitRightBelow.distance);
                 keysPressed.left = true;
                 keysPressed.right = false;
             }
             else if (!gravityClient.isFlipped() &&
-                rayHitboxes.HitRightBelow.distance <= minimalSpaceBetweenTileBelow - 
-                (rayHitboxes.HitRightBelow.collider.tag.Equals("Slope") ? gravityClient.getRayInformation().correctionOnSlopeRight.x : 0))
+                rayHitboxes.HitRightBelow.distance <= minimalSpaceBetweenTileBelow)
             {
                 keysPressed.left = false;
                 keysPressed.right = true;

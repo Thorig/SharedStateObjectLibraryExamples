@@ -121,11 +121,9 @@ namespace GameLib.System.Gravity2D
 #endif
             rayInformation.checkRaysBelow(object_, 0.0f, 
                 object_.getTransform().eulerAngles.z + 270.0f,
-                layermask, true);
+                layermask);
             float correction = 0.0f;
-            float minimalSpaceBetweenTileBelow = (rayHitboxes.HitMiddleBelow.collider.tag.CompareTo("Slope") == 0) ?
-                (rayInformation.MinimalSpaceBetweenTileBelow )://* 1.5f) :
-                rayInformation.MinimalSpaceBetweenTileBelow;
+            float minimalSpaceBetweenTileBelow = rayInformation.MinimalSpaceBetweenTileBelow;
 
             bool objectOnFloor = (rayHitboxes.DistanceBelow <
                 minimalSpaceBetweenTileBelow * rayInformation.BelowTolerance) ? true :
@@ -138,11 +136,7 @@ namespace GameLib.System.Gravity2D
                     rayInformation.MinimalSpaceBetweenTileBelow);
                 moveEntity(object_, correction);
             }
-            else
-            {
-                //Debug.Log((rayHitboxes.DistanceBelow) + " " + (rayInformation.MinimalSpaceBetweenTileBelow * 1.1f));
-            }
-
+            
             return objectOnFloor;
         }
 

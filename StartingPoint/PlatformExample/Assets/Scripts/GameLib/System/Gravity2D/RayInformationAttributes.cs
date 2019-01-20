@@ -83,17 +83,7 @@ namespace GameLib.System.Gravity2D
         protected float belowTolerance;
 
         public float BelowTolerance { get { return belowTolerance; } set { belowTolerance = value; } }
-
-
-        [SerializeField]
-        protected List<Vector2> slopeCorrectionList = new List<Vector2>();
-
-        public List<Vector2> SlopeCorrectionList
-        {
-            get { return slopeCorrectionList; }
-            set { slopeCorrectionList = value; }
-        }
-
+        
         #endregion
     }
 }
