@@ -45,17 +45,43 @@ public class AnimationTransitionSetter : MonoBehaviour
     // Use this for initialization
     private void Update()
     {
+        List<string> nameOfStates = new List<string>();
+        List<AnimatorStateTransition> animatorStateTransitionList = new List<AnimatorStateTransition>();
+
         foreach (Object obj in Selection.objects)
         {
             if (obj.GetType() == typeof(AnimatorStateMachine))
             {
                 foreach (ChildAnimatorState state in (obj as AnimatorStateMachine).states)
                 {
-                    Debug.Log(state.state.name);
+                    if (animatorStateTransitionList.Count > 0)
+                    {
+                        animatorStateTransitionList.RemoveRange(0, animatorStateTransitionList.Count);
+                    }
+
+                    if (nameOfStates.Count > 0)
+                    {
+                        nameOfStates.RemoveRange(0, nameOfStates.Count);
+                    }
+                    
                     foreach (AnimatorStateTransition stateTransition in state.state.transitions)
                     {
+                        nameOfStates.Add(stateTransition.destinationState.name);
                         setTransition(stateTransition);
+                        animatorStateTransitionList.Add(stateTransition);
                     }
+                    foreach (ChildAnimatorState _state in (obj as AnimatorStateMachine).states)
+                    {
+                        if (_state.state.name.CompareTo(state.state.name) != 0 && !nameOfStates.Contains(_state.state.name))
+                        {
+                            AnimatorStateTransition newState = new AnimatorStateTransition();
+                            newState.destinationState = _state.state;
+                            animatorStateTransitionList.Add(newState);
+                            setTransition(newState);
+                        }
+                    }
+                    state.state.transitions = animatorStateTransitionList.ToArray();
+
                 }
             }
             /*
