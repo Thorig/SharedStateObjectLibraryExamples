@@ -1,6 +1,7 @@
 ﻿using GameLib.Entity;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace GameLib.Util
@@ -43,7 +44,11 @@ namespace GameLib.Util
 
                 rayInformation.BelowTolerance = tileHeight * 1.3f;
 
-           }
+                doRayCalibration = false;
+                EditorUtility.SetDirty(rayInformation);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
         }
     }
 }

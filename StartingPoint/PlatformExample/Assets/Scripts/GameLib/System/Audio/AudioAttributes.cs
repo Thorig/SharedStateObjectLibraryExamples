@@ -7,6 +7,11 @@ namespace GameLib.System.Audio
     [Serializable]
     public class AudioAttributes
     {
+        public static int WALK_SOUND = 0;
+        public static int JUMP_SOUND = 1;
+        public static int LANDING_SOUND = 2;
+        public static int HITTED_SOUND = 3;
+
         [SerializeField]
         protected AudioSource audioSource;
 

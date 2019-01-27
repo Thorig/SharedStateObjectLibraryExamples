@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -6,9 +7,7 @@ using UnityEngine;
 
 public class AnimationTransitionSetter : MonoBehaviour
 {
-    public Hashtable stateConditionTable = new Hashtable();
-
-    private void Start()
+    private static void setHashTable(out Hashtable stateConditionTable)
     {
         Dictionary<string, float> dict = new Dictionary<string, float>();
         
@@ -17,7 +16,7 @@ public class AnimationTransitionSetter : MonoBehaviour
         stateConditionTable = new Hashtable(dict);
     }
 
-    protected virtual void addStateConditions(Dictionary<string, float> dict)
+    protected static void addStateConditions(Dictionary<string, float> dict)
     {
         dict.Add("idle", 0); //ANIMATION_IDLE = 0;
         dict.Add("walk", 1); //ANIMATION_WALK = 1;
@@ -42,9 +41,14 @@ public class AnimationTransitionSetter : MonoBehaviour
         dict.Add("run", 14); //ANIMATION_RUN = 14;
     }
 
-    // Use this for initialization
-    private void Update()
+    [MenuItem("Animator/Set Transitions for states &0")]
+    public static void ConvertTransitionToContinue()
     {
+        Hashtable stateConditionTable = new Hashtable();
+        AnimatorStateMachine stateMachine = null;
+
+        setHashTable(out stateConditionTable);
+
         List<string> nameOfStates = new List<string>();
         List<AnimatorStateTransition> animatorStateTransitionList = new List<AnimatorStateTransition>();
 
@@ -52,7 +56,9 @@ public class AnimationTransitionSetter : MonoBehaviour
         {
             if (obj.GetType() == typeof(AnimatorStateMachine))
             {
-                foreach (ChildAnimatorState state in (obj as AnimatorStateMachine).states)
+                stateMachine = (obj as AnimatorStateMachine);
+
+                foreach (ChildAnimatorState state in stateMachine.states)
                 {
                     if (animatorStateTransitionList.Count > 0)
                     {
@@ -67,50 +73,53 @@ public class AnimationTransitionSetter : MonoBehaviour
                     foreach (AnimatorStateTransition stateTransition in state.state.transitions)
                     {
                         nameOfStates.Add(stateTransition.destinationState.name);
-                        setTransition(stateTransition);
+                        setTransition(stateTransition, 
+                            (float)stateConditionTable[stateTransition.destinationState.name.ToLower()]);
                         animatorStateTransitionList.Add(stateTransition);
                     }
-                    foreach (ChildAnimatorState _state in (obj as AnimatorStateMachine).states)
+                    foreach (ChildAnimatorState _state in stateMachine.states)
                     {
                         if (_state.state.name.CompareTo(state.state.name) != 0 && !nameOfStates.Contains(_state.state.name))
                         {
                             AnimatorStateTransition newState = new AnimatorStateTransition();
                             newState.destinationState = _state.state;
                             animatorStateTransitionList.Add(newState);
-                            setTransition(newState);
+                            setTransition(newState, (float)stateConditionTable[_state.state.name.ToLower()]);
+                            if (AssetDatabase.GetAssetPath(stateMachine) != "")
+                                AssetDatabase.AddObjectToAsset(newState, AssetDatabase.GetAssetPath(stateMachine));
                         }
                     }
+                    string path = AssetDatabase.GetAssetPath(state.state);
                     state.state.transitions = animatorStateTransitionList.ToArray();
-
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
                 }
             }
-            /*
-            if (obj.GetType() == typeof(AnimatorStateTransition))
-            {
-                setTransition(obj as AnimatorStateTransition);
-            }
-            */
         }
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
-    protected virtual void setTransition(AnimatorStateTransition transition)
+    protected static void setTransition(AnimatorStateTransition transition, float stateId)
     {
         Undo.RecordObject(transition, "Set Exit Time Transition");
         transition.hasExitTime = false;
         transition.exitTime = 0;
         transition.hasFixedDuration = true;
         transition.duration = 0;
-        transition.offset = 0;
-        
-        transition.conditions = new AnimatorCondition[1] { getAnimatorCondition(transition.destinationState.name) };
+
+
+        transition.conditions = new AnimatorCondition[1] { getAnimatorCondition(transition.destinationState.name,
+            stateId) };
     }
 
-    protected virtual AnimatorCondition getAnimatorCondition(string destinationStateName)
+    protected static AnimatorCondition getAnimatorCondition(string destinationStateName, float stateId)
     {
         AnimatorCondition condition = new AnimatorCondition();
         condition.mode = AnimatorConditionMode.Equals;
         condition.parameter = "State";
-        condition.threshold = (float)stateConditionTable[destinationStateName.ToLower()];
+        condition.threshold = stateId;
         return condition;
     }
 }
+#endif

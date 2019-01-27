@@ -11,21 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565db503739611b4499edafb53b737ac, type: 3}
   m_Name: RayInformationPlayer
   m_EditorClassIdentifier: 
-  posRayTopFront: {x: 0, y: 0}
-  posRayMiddleFront: {x: 0, y: 0}
-  posRayBelowFront: {x: 0, y: 0}
-  posRayLeftTop: {x: 0, y: 0}
+  posRayTopFront: {x: 0, y: 0.45}
+  posRayMiddleFront: {x: 0, y: -0.1}
+  posRayBelowFront: {x: 0, y: -0.45}
+  posRayLeftTop: {x: 0, y: 0.45}
   posRayMiddleTop: {x: 0, y: 0}
-  posRayRightTop: {x: 0, y: 0}
-  posRayLeftBelow: {x: 0, y: 0}
+  posRayRightTop: {x: 0, y: -0.45}
+  posRayLeftBelow: {x: 0, y: -0.45}
   posRayMiddleBelow: {x: 0, y: 0}
-  posRayRightBelow: {x: 0, y: 0}
-  minimalSpaceBetweenTileFront: 0
-  minimalSpaceBetweenTileTop: 0
-  minimalSpaceBetweenTileBelow: 0
+  posRayRightBelow: {x: 0, y: 0.45}
+  minimalSpaceBetweenTileFront: 0.5
+  minimalSpaceBetweenTileTop: 0.5
+  minimalSpaceBetweenTileBelow: 0.5
   slopesOnly: 0
   slopeLayerNumber: 0
-  belowTolerance: 0
-  slopeCorrectionList: []
-  correctionOnSlopeLeft: {x: 0, y: 0}
-  correctionOnSlopeRight: {x: 0, y: 0}
+  belowTolerance: 1.3

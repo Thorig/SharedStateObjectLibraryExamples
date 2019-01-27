@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 1208705336}
   - component: {fileID: 1208705335}
   - component: {fileID: 1208705337}
+  - component: {fileID: 1208705338}
   m_Layer: 9
   m_Name: PlayerEntity
   m_TagString: Player
@@ -261,7 +262,7 @@ Animator:
   m_GameObject: {fileID: 1208705330}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 85fecf38be96df5418cf49546dbbfaeb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 98aef1dafa8edbe4e98844b4b0ee6e6d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -376,8 +377,10 @@ MonoBehaviour:
   audioAttributes:
     audioSource: {fileID: 1208705337}
     audioClips:
-    - {fileID: 8300000, guid: 6404ff9451aa8724ca72000ddac4f472, type: 3}
+    - {fileID: 8300000, guid: e9fdef414ff23e24d9feb6e0eaefb8ee, type: 3}
     - {fileID: 8300000, guid: ab3b963feae54da4d9debe63c69b5590, type: 3}
+    - {fileID: 8300000, guid: dd99afbd0c737c240901396320f6169a, type: 3}
+    - {fileID: 8300000, guid: d8749f921fc84da4994b8bf971ad48bd, type: 3}
     isNPC: 0
     player: {fileID: 1208705330}
     source: {fileID: 1208705330}
@@ -524,6 +527,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1208705338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1208705330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f106bd6154a05d45a37866cadfb7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity:
+    gravity: 70
+    y_velocity_reset: -0.5
+    y_velocity_jump_reset: 25
+    y_velocity: 0
+    yFallDistance: 0
+    multiplyYVelocityUp: -1
+    multiplyYVelocityDown: -1
+    distanceTravelled: {x: 0, y: 0, z: 0}
+    slope: 0
+    jumping: 0
+    reset: 0
+    layermask: 0
+  gravitySetting: 75
+  rayInformation: {fileID: 11400000, guid: c8c5b6774361db44580830cf500585a2, type: 2}
+  rotateHorizontalMovement: 0
+  collider2D: {fileID: 1208705336}
+  jumpForce: 0
+  spriteRenderer: {fileID: 1208705332}
+  castsShadows: 0
+  layermask: 0
+  rayInformationFlippedX3D: {fileID: 0}
+  rayInformationFlippedX: {fileID: 0}
+  collider2DFlippedX: {fileID: 0}
+  keys: {fileID: 11400000, guid: 0aac83d0183376749b7dd7acedd422c8, type: 2}
+  movementSpeed: 0
+  animationAttributes:
+    lastAttackAnimation: -1
+    comboCoolDown: 0.3
+    animator: {fileID: 0}
+    animationState: 0
+    attackAnimationCooldown: 0.1
+  jumpedReleased: 1
+  audioAttributes:
+    audioSource: {fileID: 0}
+    audioClips: []
+    isNPC: 0
+    player: {fileID: 0}
+    source: {fileID: 0}
+    maxDistance: 0
+    maxValuePercentage: 0
+  activeFrame: 1
+  doRayCalibration: 1
+  doGravityTest: 0
+  tileHeight: 1
 --- !u!1 &1349193043
 GameObject:
   m_ObjectHideFlags: 0
