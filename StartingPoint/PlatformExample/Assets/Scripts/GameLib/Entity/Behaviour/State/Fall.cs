@@ -1,4 +1,5 @@
 ﻿using GameLib.Entity.Animation;
+using GameLib.System.Audio;
 using GameLib.System.Controller;
 using GameLib.System.Gravity2D;
 using System;
@@ -26,6 +27,7 @@ namespace GameLib.Entity.Behaviour.State
 
             if (gravity.isStanding() || gravity.isNotFalling())
             {
+                entity.playAudio(AudioAttributes.LANDING_SOUND);
                 IBehaviourStateFactory behaviourStateFactory = entity.getBehaviourStateFactory(); 
 
                 if (!keysPressed.left && !keysPressed.right)

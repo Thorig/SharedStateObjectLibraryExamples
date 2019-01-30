@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 1208705336}
   - component: {fileID: 1208705335}
   - component: {fileID: 1208705337}
-  - component: {fileID: 1208705338}
   m_Layer: 9
   m_Name: PlayerEntity
   m_TagString: Player
@@ -441,7 +440,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ce2b78e4bcc66594c87390029bf56d0c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -527,62 +526,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1208705338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208705330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f106bd6154a05d45a37866cadfb7784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity:
-    gravity: 70
-    y_velocity_reset: -0.5
-    y_velocity_jump_reset: 25
-    y_velocity: 0
-    yFallDistance: 0
-    multiplyYVelocityUp: -1
-    multiplyYVelocityDown: -1
-    distanceTravelled: {x: 0, y: 0, z: 0}
-    slope: 0
-    jumping: 0
-    reset: 0
-    layermask: 0
-  gravitySetting: 75
-  rayInformation: {fileID: 11400000, guid: c8c5b6774361db44580830cf500585a2, type: 2}
-  rotateHorizontalMovement: 0
-  collider2D: {fileID: 1208705336}
-  jumpForce: 0
-  spriteRenderer: {fileID: 1208705332}
-  castsShadows: 0
-  layermask: 0
-  rayInformationFlippedX3D: {fileID: 0}
-  rayInformationFlippedX: {fileID: 0}
-  collider2DFlippedX: {fileID: 0}
-  keys: {fileID: 11400000, guid: 0aac83d0183376749b7dd7acedd422c8, type: 2}
-  movementSpeed: 0
-  animationAttributes:
-    lastAttackAnimation: -1
-    comboCoolDown: 0.3
-    animator: {fileID: 0}
-    animationState: 0
-    attackAnimationCooldown: 0.1
-  jumpedReleased: 1
-  audioAttributes:
-    audioSource: {fileID: 0}
-    audioClips: []
-    isNPC: 0
-    player: {fileID: 0}
-    source: {fileID: 0}
-    maxDistance: 0
-    maxValuePercentage: 0
-  activeFrame: 1
-  doRayCalibration: 1
-  doGravityTest: 0
-  tileHeight: 1
 --- !u!1 &1349193043
 GameObject:
   m_ObjectHideFlags: 0

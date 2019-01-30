@@ -1,4 +1,5 @@
 ﻿using GameLib.Entity.Animation;
+using GameLib.System.Audio;
 
 namespace GameLib.Entity.Behaviour.State
 {
@@ -13,6 +14,7 @@ namespace GameLib.Entity.Behaviour.State
         {
             entity.setMoving(false);
             switchAnimation(AnimationAttributes.ANIMATION_HITTED, entity);
+            entity.playAudio(AudioAttributes.HITTED_SOUND);
         }
 
         public override void update(IEntity entity)

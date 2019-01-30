@@ -2,6 +2,7 @@
 //#define USE_3D_RAYS
 using GameLib.Entity.Animation;
 using GameLib.Level;
+using GameLib.System.Audio;
 using GameLib.System.Controller;
 using GameLib.System.Gravity2D;
 using System;

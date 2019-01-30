@@ -61,8 +61,6 @@ namespace GameLib.Entity
             set { keysPressed = value; }
         }
 
-        protected bool jumpPressed;
-
         protected AbstractState state;
 
         public AbstractState State
@@ -87,9 +85,7 @@ namespace GameLib.Entity
             get { return isMoving; }
             set { isMoving = value; }
         }
-
-        protected float stepSpeed;
-
+        
         [SerializeField]
         protected AnimationAttributes animationAttributes;
 
@@ -116,14 +112,10 @@ namespace GameLib.Entity
             get { return audioAttributes; }
             set { audioAttributes = value; }
         }
-
-        protected bool hittedOnTheRight = false;
-        protected bool moveRightOnHit = false;
-        protected bool hittedEnemey = false;
-
+        
         protected float healthPoints = 1000.0f;
 
-        protected int balance = 3;
+       // protected int balance = 3;
 
         [SerializeField]
         protected int activeFrame = 1;
@@ -235,6 +227,11 @@ namespace GameLib.Entity
         public IEntity getEntity()
         {
             return entity;
+        }
+
+        public void playAudio(int audioId)
+        {
+            AudioAttributes.playAudio(audioId);
         }
     }
 }

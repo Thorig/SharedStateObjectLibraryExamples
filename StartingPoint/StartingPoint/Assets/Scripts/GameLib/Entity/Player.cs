@@ -236,5 +236,10 @@ namespace GameLib.Entity
         {
             return entity;
         }
+
+        public void playAudio(int audioId)
+        {
+            AudioAttributes.playAudio(audioId);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GameLib.Entity.Animation;
+using GameLib.System.Audio;
 using GameLib.System.Controller;
 using GameLib.System.Gravity2D;
 using System;
@@ -23,7 +24,7 @@ namespace GameLib.Entity.Behaviour.State
             entity.getGravity().Jumping = true;
             entity.getGravity()._reset(entity.getGravityClient());
             entity.getGravity().Reset = false;
-            entity.playAudio(1);
+            entity.playAudio(AudioAttributes.JUMP_SOUND);
         }
 
         public override void update(IEntity entity)
