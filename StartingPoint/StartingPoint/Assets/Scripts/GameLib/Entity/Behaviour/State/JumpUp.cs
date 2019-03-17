@@ -1,8 +1,10 @@
 ﻿using GameLib.Entity.Animation;
+using GameLib.Level;
 using GameLib.System.Audio;
 using GameLib.System.Controller;
 using GameLib.System.Gravity2D;
 using System;
+using UnityEngine;
 
 namespace GameLib.Entity.Behaviour.State
 {
@@ -17,6 +19,8 @@ namespace GameLib.Entity.Behaviour.State
         {
             switchAnimation(AnimationAttributes.ANIMATION_JUMPUP, entity);
             setGravityAndPlaySound(entity);
+            LayersLookup layersLookup = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LayersLookup>();
+            layermask = (1 << layersLookup.giveLayerNumber("Tile"));
         }
 
         protected void setGravityAndPlaySound(IEntity entity)

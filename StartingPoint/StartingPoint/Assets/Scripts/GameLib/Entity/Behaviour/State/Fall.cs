@@ -1,8 +1,10 @@
 ﻿using GameLib.Entity.Animation;
+using GameLib.Level;
 using GameLib.System.Audio;
 using GameLib.System.Controller;
 using GameLib.System.Gravity2D;
 using System;
+using UnityEngine;
 
 namespace GameLib.Entity.Behaviour.State
 {
@@ -15,6 +17,8 @@ namespace GameLib.Entity.Behaviour.State
 
         public override void init(IEntity entity)
         {
+            LayersLookup layersLookup = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LayersLookup>();
+            layermask = (1 << layersLookup.giveLayerNumber("Tile"));
             switchAnimation(AnimationAttributes.ANIMATION_FALL, entity);
         }
 

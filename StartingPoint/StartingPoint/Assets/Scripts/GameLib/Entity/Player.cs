@@ -175,10 +175,11 @@ namespace GameLib.Entity
             keysPressed = controller.updateInput();
         }
 
-        public override void FixedUpdate()
+        public override void LateUpdate()
         {
             if (frameCounter % activeFrame == 0)
             {
+                
 #if DEBUG
                 {
 #if USE_3D_RAYS
@@ -193,14 +194,14 @@ namespace GameLib.Entity
                 }
 
 #endif
-                    if (!keysPressed.jump)
+                if (!keysPressed.jump)
                 {
                     jumpedReleased = true;
                 }
                 
                 state.update(entity);
 
-                base.FixedUpdate();
+                base.LateUpdate();
 
                 animationAttributes.AttackAnimationCooldown -= Time.fixedDeltaTime;
             }

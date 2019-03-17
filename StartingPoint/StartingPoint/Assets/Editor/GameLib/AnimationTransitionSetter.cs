@@ -89,7 +89,6 @@ public class AnimationTransitionSetter : MonoBehaviour
                                 AssetDatabase.AddObjectToAsset(newState, AssetDatabase.GetAssetPath(stateMachine));
                         }
                     }
-                    string path = AssetDatabase.GetAssetPath(state.state);
                     state.state.transitions = animatorStateTransitionList.ToArray();
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

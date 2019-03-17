@@ -17,11 +17,11 @@ namespace GameLib.Util
         }
 
         // Update is called once per frame
-        public override void FixedUpdate()
+        public override void LateUpdate()
         {
             if(doGravityTest)
             {
-                base.FixedUpdate();
+                base.LateUpdate();
             }
 
             if (doRayCalibration)

@@ -24,7 +24,7 @@ namespace GameLib.Entity.NonPlayerCharacter
         }
 
         [SerializeField]
-        protected Vector3 lastPosition;
+        public Vector3 lastPosition;
 
         [SerializeField]
         protected float positionY;
@@ -39,10 +39,14 @@ namespace GameLib.Entity.NonPlayerCharacter
             aiCharacterController = controllerFactory.getAICharacterController(this, new BrainFactory());
         }
 
-        public override void FixedUpdate()
+        public override void LateUpdate()
         {
-            fixedUpdateBody();
-            base.FixedUpdate();
+            if (frameCounter % activeFrame == 0)
+            {
+                fixedUpdateBody();
+            }
+
+            base.LateUpdate();
         }
 
         protected virtual void fixedUpdateBody()

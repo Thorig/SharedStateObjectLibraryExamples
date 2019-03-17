@@ -87,7 +87,6 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
             
             if (gravityClient.isFlipped() && rayHitboxes.HitLeftBelow.distance > 1.0f)
             {
-                Debug.Log("1. " + rayHitboxes.HitLeftBelow.distance);
                 keysPressed.left = false;
                 keysPressed.right = true;
             }
@@ -101,7 +100,6 @@ namespace GameLib.Entity.NonPlayerCharacter.StateMachine.Logic
             if (!gravityClient.isFlipped() &&
                 rayHitboxes.HitRightBelow.distance > 1.0f)
             {
-                Debug.Log("2. " + rayHitboxes.HitRightBelow.distance);
                 keysPressed.left = true;
                 keysPressed.right = false;
             }

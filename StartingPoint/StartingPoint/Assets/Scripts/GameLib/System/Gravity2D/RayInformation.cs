@@ -218,13 +218,13 @@ namespace GameLib.System.Gravity2D
             if (hit.collider != null)
             {
                 result = hit.distance;
-                Debug.DrawLine(startRay, hit.point, color);
+              /*  Debug.DrawLine(startRay, hit.point, color);
             }
             else
             {
                 Debug.DrawLine(startRay, endRay, color);
-            }
-
+            */}
+            
             return result;
         }
 
@@ -257,14 +257,14 @@ namespace GameLib.System.Gravity2D
             if (hit.collider != null)
             {
                 result = hit.distance;
-                
-                Debug.DrawLine(startRay, hit.point, color);
+              Debug.DrawLine(startRay, hit.point, color);
             }
+            
             else
             {
                 Debug.DrawLine(startRay, endRay, color);
             }
-
+            
             return result;
         }
     }
